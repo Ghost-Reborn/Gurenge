@@ -33,8 +33,7 @@ class TestWidget extends StatefulWidget{
 
 class _TestWidgetState extends State<TestWidget>{
 
-  String animeName = "Anime Name";
-  String thumbnail = "";
+  String testText = "Loading...";
 
   @override
   void initState() {
@@ -45,14 +44,13 @@ class _TestWidgetState extends State<TestWidget>{
   void fetchData() async {
     AllAnimeParser parser = AllAnimeParser();
     try{
-      AllAnime allAnime = await parser.ParseAllAnime() as AllAnime;
+      String testParse = await parser.testParser();
       setState(() {
-        animeName = allAnime.animeName;
-        thumbnail = allAnime.thumbnail;
+        testText = testParse;
       });
     }catch(e){
       setState(() {
-        animeName = "Error";
+        testText = "Error";
       });
     }
   }
@@ -61,7 +59,7 @@ class _TestWidgetState extends State<TestWidget>{
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
-      child: AnimeThumbnail(animeName, thumbnail, (){}),
+      child: Text(testText),
     );
   }
 }
