@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'anime_thumbnail.dart';
+import 'all_anime_parser.dart';
 
 void main() {
   runApp(const Gurenge());
@@ -14,21 +14,50 @@ class Gurenge extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimeThumbnail(
-                  'Naruto',
-                  'https://i.pinimg.com/736x/86/2c/e2/862ce2907b6220ff9614cff0673a6791.jpg',
-                      () {}),
-              AnimeThumbnail(
-                  'Naruto',
-                  'https://i.pinimg.com/736x/86/2c/e2/862ce2907b6220ff9614cff0673a6791.jpg',
-                      () {}),
-            ],
-          ),
+          child: TestWidget(),
         )
       ),
+    );
+  }
+}
+
+class TestWidget extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return _TestWidgetState();
+  }
+
+}
+
+class _TestWidgetState extends State<TestWidget>{
+
+  String testText = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  void fetchData() async {
+    AllAnimeParser parser = AllAnimeParser();
+    try{
+      String data = await parser.ParseAllAnime();
+      setState(() {
+        testText = data;
+      });
+    }catch(e){
+      setState(() {
+        testText = "Error getting response from server";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(testText),
     );
   }
 }
