@@ -1,7 +1,5 @@
-import 'package:Gurenge/Gurenge.dart';
-import 'package:Gurenge/anime_thumbnail.dart';
+import 'package:Gurenge/server/AllAnimeServer.dart';
 import 'package:flutter/material.dart';
-import 'all_anime_parser.dart';
 
 void main() {
   runApp(const Gurenge());
@@ -42,9 +40,9 @@ class _TestWidgetState extends State<TestWidget>{
   }
 
   void fetchData() async {
-    AllAnimeParser parser = AllAnimeParser();
+    AllAnimeServer server = AllAnimeServer();
     try{
-      String testParse = await parser.testParser();
+      String testParse = await server.queryPopular();
       setState(() {
         testText = testParse;
       });
