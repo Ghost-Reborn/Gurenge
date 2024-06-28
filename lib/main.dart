@@ -1,3 +1,5 @@
+import 'package:Gurenge/Gurenge.dart';
+import 'package:Gurenge/anime_thumbnail.dart';
 import 'package:flutter/material.dart';
 import 'all_anime_parser.dart';
 
@@ -31,7 +33,8 @@ class TestWidget extends StatefulWidget{
 
 class _TestWidgetState extends State<TestWidget>{
 
-  String testText = "Loading...";
+  String animeName = "Anime Name";
+  String thumbnail = "";
 
   @override
   void initState() {
@@ -42,13 +45,14 @@ class _TestWidgetState extends State<TestWidget>{
   void fetchData() async {
     AllAnimeParser parser = AllAnimeParser();
     try{
-      String data = await parser.ParseAllAnime();
+      AllAnime allAnime = await parser.ParseAllAnime() as AllAnime;
       setState(() {
-        testText = data;
+        animeName = allAnime.animeName;
+        thumbnail = allAnime.thumbnail;
       });
     }catch(e){
       setState(() {
-        testText = "Error getting response from server";
+        animeName = "Error";
       });
     }
   }
@@ -57,7 +61,7 @@ class _TestWidgetState extends State<TestWidget>{
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
-      child: Text(testText),
+      child: AnimeThumbnail(animeName, thumbnail, (){}),
     );
   }
 }
