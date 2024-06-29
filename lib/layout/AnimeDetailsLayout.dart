@@ -38,17 +38,25 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout> {
     });
   }
 
+  void _onFabClicked() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AnimeDetailsLayout(id, animeDetails.englishName)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
       ),
-      body: AnimeThumbnail(
-        animeDetails.englishName,
-        animeDetails.thumbnail,
-            () {},
+      body: AnimeThumbnail(animeDetails.englishName, animeDetails.thumbnail, (){}),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onFabClicked,
+        child: const Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
