@@ -13,6 +13,10 @@ class Gurenge extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          title: Text("Gurenge"),
+          backgroundColor: Colors.red,
+        ),
         body: Center(
           child: TestWidget(),
         )
@@ -42,7 +46,7 @@ class _TestWidgetState extends State<TestWidget>{
   void fetchData() async {
     AllAnimeServer server = AllAnimeServer();
     try{
-      String testParse = await server.queryPopular();
+      String testParse = await server.searchAnime("One Piece");
       setState(() {
         testText = testParse;
       });
