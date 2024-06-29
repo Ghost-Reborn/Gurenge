@@ -1,5 +1,5 @@
 import 'package:Gurenge/TestClass.dart';
-import 'package:Gurenge/server/AllAnimeServer.dart';
+import 'package:Gurenge/model/AllAnime.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,28 +14,25 @@ class Gurenge extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Gurenge"),
-          backgroundColor: Colors.red,
-        ),
-        body: Center(
-          child: TestWidget(),
-        )
-      ),
+          appBar: AppBar(
+            title: Text("Gurenge"),
+            backgroundColor: Colors.red,
+          ),
+          body: Center(
+            child: TestWidget(),
+          )),
     );
   }
 }
 
-class TestWidget extends StatefulWidget{
+class TestWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _TestWidgetState();
   }
-
 }
 
-class _TestWidgetState extends State<TestWidget>{
-
+class _TestWidgetState extends State<TestWidget> {
   String testText = "Loading...";
 
   @override
@@ -46,12 +43,16 @@ class _TestWidgetState extends State<TestWidget>{
 
   void fetchData() async {
     TestClass testClass = TestClass();
-    try{
-      String testParse = await testClass.parseJson();
+    try {
+      List<AllAnime> testParse = await testClass.parseJson();
+      String test = "";
+      for (int i = 0; i < testParse.length; i++) {
+        test += testParse.elementAt(i).id + "\n";
+      }
       setState(() {
-        testText = testParse.toString();
+        testText = test;
       });
-    }catch(e){
+    } catch (e) {
       setState(() {
         testText = "$e";
       });
