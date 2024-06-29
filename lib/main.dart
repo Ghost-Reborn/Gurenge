@@ -44,8 +44,8 @@ class _TestWidgetState extends State<TestWidget> {
   }
 
   void fetchData() async {
-    AllAnimeParser testClass = AllAnimeParser();
-    List<AllAnime> allAnime = await testClass.parseQueryPopular();
+    AllAnimeParser allAnimeParser = AllAnimeParser();
+    List<AllAnime> allAnime = await allAnimeParser.parseSearchAnime("One Piece");
     setState(() {
       allAnimes = allAnime;
     });
