@@ -1,11 +1,10 @@
 import 'package:Gurenge/parser/AllAnimeParser.dart';
-import 'package:Gurenge/server/AllAnimeServer.dart';
+import 'package:Gurenge/ui/AnimeThumbnail.dart';
 import 'package:flutter/material.dart';
 
 import '../model/AnimeDetails.dart';
 
-class AnimeDetailsLayout extends StatefulWidget{
-
+class AnimeDetailsLayout extends StatefulWidget {
   String id;
   String name = "";
 
@@ -17,11 +16,11 @@ class AnimeDetailsLayout extends StatefulWidget{
   }
 }
 
-class AnimeDetailsLayoutState extends State<AnimeDetailsLayout>{
-
+class AnimeDetailsLayoutState extends State<AnimeDetailsLayout> {
   String id;
   String name = "";
   String testText = "Loading...";
+  AnimeDetails animeDetails = AnimeDetails('', "", "");
 
   AnimeDetailsLayoutState(this.id, this.name);
 
@@ -35,7 +34,7 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout>{
     AllAnimeParser parser = AllAnimeParser();
     AnimeDetails animeDetails = await parser.parseAnimeDetails(id);
     setState(() {
-      testText = animeDetails.name;
+      this.animeDetails = animeDetails;
     });
   }
 
@@ -45,13 +44,11 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout>{
       appBar: AppBar(
         title: Text(name),
       ),
-      body: Container(
-        margin: EdgeInsets.all(30.0),
-        child: SingleChildScrollView(
-          child: SelectableText(testText),
-        ),
+      body: AnimeThumbnail(
+        animeDetails.englishName,
+        animeDetails.thumbnail,
+            () {},
       ),
     );
   }
-
 }
