@@ -19,7 +19,7 @@ class Gurenge extends StatelessWidget {
             title: Text("Gurenge"),
             backgroundColor: Colors.red,
           ),
-          body: Center(
+          body: Container(
             child: TestWidget(),
           )),
     );
@@ -53,21 +53,19 @@ class _TestWidgetState extends State<TestWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      color: Colors.redAccent,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, // Number of widgets in a row
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
-          childAspectRatio: 2 / 3, // Adjust as necessary
+          crossAxisSpacing: 2.0,
+          mainAxisSpacing: 2.0,
+          childAspectRatio: 2/3, // Adjust as necessary
         ),
         itemCount: allAnimes.length,
-        itemBuilder: (context,index){
+        itemBuilder: (context, index) {
           return AnimeThumbnail(
-            allAnimes[index].name,
-            allAnimes[index].thumbnail,
-              (){}
-          );
+              allAnimes[index].name, allAnimes[index].thumbnail, () {});
         },
       ),
     );

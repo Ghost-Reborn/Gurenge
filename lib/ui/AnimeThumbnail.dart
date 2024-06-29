@@ -20,36 +20,33 @@ class _AnimeThumbnailState extends State<AnimeThumbnail> {
       onTap: widget.onTap,
       child: Container(
         width: 100,
-        height: 190, // Increased height to accommodate text below the image
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.grey[800],
-        ),
+        height: 170,
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                widget.imageUrl,
-                width: 100,
-                height: 150,
-                fit: BoxFit.cover,
+            Container(
+              margin: EdgeInsets.only(top: 10.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  widget.imageUrl,
+                  width: 100,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Text(
-                  widget.animeName,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  maxLines: 2, // Adjust based on your design
-                  overflow: TextOverflow.ellipsis,
+            Container(
+              width: 100,
+              child: Text(
+                widget.animeName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
+                maxLines: 2, // Adjust based on your design
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
