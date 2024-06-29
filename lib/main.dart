@@ -1,5 +1,6 @@
 import 'package:Gurenge/TestClass.dart';
 import 'package:Gurenge/model/AllAnime.dart';
+import 'package:Gurenge/ui/AnimeThumbnail.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,6 +35,7 @@ class TestWidget extends StatefulWidget {
 
 class _TestWidgetState extends State<TestWidget> {
   String testText = "Loading...";
+  List<AllAnime> allAnimes = [];
 
   @override
   void initState() {
@@ -43,27 +45,25 @@ class _TestWidgetState extends State<TestWidget> {
 
   void fetchData() async {
     TestClass testClass = TestClass();
-    try {
-      List<AllAnime> testParse = await testClass.parseJson();
-      String test = "";
-      for (int i = 0; i < testParse.length; i++) {
-        test += testParse.elementAt(i).id + "\n";
-      }
-      setState(() {
-        testText = test;
-      });
-    } catch (e) {
-      setState(() {
-        testText = "$e";
-      });
-    }
+    List<AllAnime> allAnime = await testClass.parseJson();
+    setState(() {
+      allAnimes = allAnime;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
-      child: SelectableText(testText),
+    return Center(
+      child: ListView.builder(
+        itemCount: allAnimes.length,
+        itemBuilder: (context,index){
+          return AnimeThumbnail(
+            allAnimes[index].name,
+            allAnimes[index].thumbnail,
+              (){}
+          );
+        },
+      ),
     );
   }
 }
