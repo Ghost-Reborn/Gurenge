@@ -1,9 +1,8 @@
 import 'package:Gurenge/server/AllAnimeServer.dart';
+import '../model/AllAnime.dart';
 
-import 'model/AllAnime.dart';
-
-class TestClass{
-  Future<List<AllAnime>> parseJson() async{
+class AllAnimeParser{
+  Future<List<AllAnime>> parseQueryPopular() async{
     Map<String, dynamic> test = await  AllAnimeServer().queryPopular();
     List<dynamic> recommendations = test['data']['queryPopular']['recommendations'];
     List<AllAnime> allAnimes = [];

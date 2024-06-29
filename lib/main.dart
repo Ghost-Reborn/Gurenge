@@ -1,4 +1,4 @@
-import 'package:Gurenge/TestClass.dart';
+import 'package:Gurenge/parser/AllAnimeParser.dart';
 import 'package:Gurenge/model/AllAnime.dart';
 import 'package:Gurenge/ui/AnimeThumbnail.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +44,8 @@ class _TestWidgetState extends State<TestWidget> {
   }
 
   void fetchData() async {
-    TestClass testClass = TestClass();
-    List<AllAnime> allAnime = await testClass.parseJson();
+    AllAnimeParser testClass = AllAnimeParser();
+    List<AllAnime> allAnime = await testClass.parseQueryPopular();
     setState(() {
       allAnimes = allAnime;
     });
