@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
 class DioConnect {
-  Future<String> connectAndGetJson(String url) async {
+  Future<Map<String,dynamic>> connectAndGetJson(String url) async {
+    Map<String, dynamic> json = Map();
     try {
       Dio dio = Dio(BaseOptions(headers: {
         'Referer': 'https://allanime.to',
@@ -13,15 +14,12 @@ class DioConnect {
       final response = await dio.get(url);
 
       if (response.statusCode == 200) {
-        return response.data.toString();
+        json = response.data;
+        return json['data'];
       }
     } catch (e) {
-      if (e is DioError) {
-        if (e.response != null) {
-          return "${e.response!.data}";
-        }
-      }
+      print("$e");
     }
-    return "NULL";
+    return json;
   }
 }

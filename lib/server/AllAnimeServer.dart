@@ -5,7 +5,7 @@ class AllAnimeServer {
 
   /// size - number of data to show
   /// type - anime, manga
-  Future<String> queryPopular() async {
+  Future<Map<String,dynamic>> queryPopular() async {
     String queryUrl =
         "$baseUrl?variables={\"size\":10,\"type\":\"anime\",\"dateRange\":1,\"page\":1,\"allowAdult\":false,\"allowUnknown\":false}&query=query(\$size:Int!,\$dateRange:Int!,\$page:Int!,\$allowAdult:Boolean!,\$allowUnknown:Boolean!,){queryPopular(type:anime,size:\$size,dateRange:\$dateRange,page:\$page,allowAdult:\$allowAdult,allowUnknown:\$allowUnknown){total,recommendations{anyCard{_id,name,thumbnail}}}}";
     DioConnect dioConnect = DioConnect();
@@ -13,7 +13,7 @@ class AllAnimeServer {
   }
 
   /// format - anime,manga
-  Future<String> queryRandomRecommendation() async {
+  Future<Map<String,dynamic>> queryRandomRecommendation() async {
     String queryUrl =
         "$baseUrl?variables={\"format\":\"anime\"}&query=query(\$format:String!){queryRandomRecommendation(format:\$format){_id,name,thumbnail}}";
     DioConnect dioConnect = DioConnect();
@@ -21,7 +21,7 @@ class AllAnimeServer {
   }
 
   /// format - anime,manga
-  Future<String> searchAnime(String anime) async {
+  Future<Map<String,dynamic>> searchAnime(String anime) async {
     String queryUrl =
         "$baseUrl?variables={\"search\":{\"query\":\"" +
         anime +
@@ -30,7 +30,7 @@ class AllAnimeServer {
     return dioConnect.connectAndGetJson(queryUrl);
   }
 
-  Future<String> testQuery() async {
+  Future<Map<String,dynamic>> testQuery() async {
     // Random Recommendation
     // Format can be 'anime' and 'manga'
 

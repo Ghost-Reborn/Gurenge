@@ -46,13 +46,13 @@ class _TestWidgetState extends State<TestWidget>{
   void fetchData() async {
     AllAnimeServer server = AllAnimeServer();
     try{
-      String testParse = await server.searchAnime("One Piece");
+      Map<String,dynamic> testParse = await server.searchAnime("One Piece");
       setState(() {
-        testText = testParse;
+        testText = testParse.toString();
       });
     }catch(e){
       setState(() {
-        testText = "Error";
+        testText = "$e";
       });
     }
   }
@@ -61,7 +61,7 @@ class _TestWidgetState extends State<TestWidget>{
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
-      child: Text(testText),
+      child: SelectableText(testText),
     );
   }
 }
