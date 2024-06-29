@@ -54,7 +54,13 @@ class _TestWidgetState extends State<TestWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView.builder(
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, // Number of widgets in a row
+          crossAxisSpacing: 4.0,
+          mainAxisSpacing: 4.0,
+          childAspectRatio: 2 / 3, // Adjust as necessary
+        ),
         itemCount: allAnimes.length,
         itemBuilder: (context,index){
           return AnimeThumbnail(
