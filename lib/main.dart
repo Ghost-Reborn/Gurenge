@@ -1,3 +1,4 @@
+import 'package:Gurenge/TestClass.dart';
 import 'package:Gurenge/server/AllAnimeServer.dart';
 import 'package:flutter/material.dart';
 
@@ -44,9 +45,9 @@ class _TestWidgetState extends State<TestWidget>{
   }
 
   void fetchData() async {
-    AllAnimeServer server = AllAnimeServer();
+    TestClass testClass = TestClass();
     try{
-      Map<String,dynamic> testParse = await server.searchAnime("One Piece");
+      String testParse = await testClass.parseJson();
       setState(() {
         testText = testParse.toString();
       });

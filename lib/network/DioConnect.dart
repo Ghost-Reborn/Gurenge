@@ -14,8 +14,7 @@ class DioConnect {
       final response = await dio.get(url);
 
       if (response.statusCode == 200) {
-        json = response.data;
-        return json['data'];
+        return response.data;
       }
     } catch (e) {
       print("$e");
