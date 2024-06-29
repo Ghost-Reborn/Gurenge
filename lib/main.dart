@@ -56,7 +56,7 @@ class _TestWidgetState extends State<TestWidget> {
   void fetchData() async {
     AllAnimeParser allAnimeParser = AllAnimeParser();
     List<AllAnime> allAnime =
-        await allAnimeParser.parseSearchAnime("One Piece");
+        await allAnimeParser.parseQueryPopular();
     setState(() {
       allAnimes = allAnime;
     });
@@ -66,13 +66,11 @@ class _TestWidgetState extends State<TestWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        Container(
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
               labelText: 'Search',
-              border: OutlineInputBorder(),
               suffixIcon: IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () {
