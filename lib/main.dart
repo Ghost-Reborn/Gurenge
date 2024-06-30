@@ -1,3 +1,4 @@
+import 'package:Gurenge/layout/AnimeDetailsLayout.dart';
 import 'package:Gurenge/parser/AllAnimeParser.dart';
 import 'package:Gurenge/model/AllAnime.dart';
 import 'package:Gurenge/ui/AnimeThumbnail.dart';
@@ -55,8 +56,7 @@ class _TestWidgetState extends State<TestWidget> {
 
   void fetchData() async {
     AllAnimeParser allAnimeParser = AllAnimeParser();
-    List<AllAnime> allAnime =
-        await allAnimeParser.parseQueryPopular();
+    List<AllAnime> allAnime = await allAnimeParser.parseQueryPopular();
     setState(() {
       allAnimes = allAnime;
     });
@@ -67,16 +67,25 @@ class _TestWidgetState extends State<TestWidget> {
     return Column(
       children: [
         Container(
+          padding: const EdgeInsets.all(8.0),
+          color: Colors.redAccent[100],
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
               labelText: 'Search',
               suffixIcon: IconButton(
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
                 onPressed: () {
                   performSearch(controller.text);
                 },
               ),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+              fillColor: Colors.white24,
+              filled: true,
             ),
             onSubmitted: (query) {
               performSearch(query);
@@ -85,7 +94,7 @@ class _TestWidgetState extends State<TestWidget> {
         ),
         Expanded(
           child: Container(
-            color: Colors.redAccent,
+            color: Colors.redAccent[100],
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, // Number of widgets in a row
@@ -98,7 +107,12 @@ class _TestWidgetState extends State<TestWidget> {
                 return AnimeThumbnail(
                   allAnimes[index].name,
                   allAnimes[index].thumbnail,
-                  () {},
+                  () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AnimeDetailsLayout()));
+                  },
                 );
               },
             ),

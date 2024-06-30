@@ -23,9 +23,7 @@ class AllAnimeServer {
   /// format - anime,manga
   Future<Map<String,dynamic>> searchAnime(String anime) async {
     String queryUrl =
-        "$baseUrl?variables={\"search\":{\"query\":\"" +
-        anime +
-        "\"}}&query=query(\$search:SearchInput){shows(search:\$search){edges{_id,name,thumbnail}}}";
+         "$baseUrl?variables={\"search\":{\"query\":\"$anime\"}}&query=query(\$search:SearchInput){shows(search:\$search){edges{_id,name,thumbnail}}}";
     DioConnect dioConnect = DioConnect();
     return dioConnect.connectAndGetJson(queryUrl);
   }
