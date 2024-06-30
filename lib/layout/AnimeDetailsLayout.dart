@@ -1,3 +1,4 @@
+import 'package:Gurenge/layout/AnimeEpisodesLayout.dart';
 import 'package:Gurenge/parser/AllAnimeParser.dart';
 import 'package:Gurenge/ui/AnimeThumbnail.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => AnimeDetailsLayout(id, animeDetails.englishName)));
+            builder: (context) => AnimeEpisodesLayout(id,"1")));
   }
 
   @override
