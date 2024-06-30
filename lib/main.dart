@@ -17,17 +17,17 @@ class Gurenge extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
-            title: Text("Gurenge"),
+            title: const Text("Gurenge"),
             backgroundColor: Colors.red,
           ),
-          body: Container(
-            child: TestWidget(),
-          )),
+          body: const TestWidget()),
     );
   }
 }
 
 class TestWidget extends StatefulWidget {
+  const TestWidget({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _TestWidgetState();
@@ -111,7 +111,7 @@ class _TestWidgetState extends State<TestWidget> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AnimeDetailsLayout()));
+                            builder: (context) => AnimeDetailsLayout(allAnimes[index].id, allAnimes[index].name)));
                   },
                 );
               },
