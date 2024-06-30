@@ -1,4 +1,4 @@
-import 'package:Gurenge/parser/AllAnimeParser.dart';
+import 'package:Gurenge/parser/AllAnimeServerParser.dart';
 import 'package:flutter/material.dart';
 
 class AnimeEpisodesLayout extends StatefulWidget {
@@ -23,9 +23,10 @@ class AnimeEpisodesLayoutState extends State<AnimeEpisodesLayout> {
   AnimeEpisodesLayoutState(this.id, this.episode);
 
   void tapFunction() async {
-    Map<String, dynamic> test = await AllAnimeParser().parseAnimeServers(id, episode);
+    // TODO show available servers (Luf-Mp4 etc) and show list of servers
+    // void test = await AllAnimeServerParser().parseAnimeServers(id, episode);
     setState(() {
-      testText = test.toString();
+      testText = "Done";
     });
   }
 
@@ -36,9 +37,7 @@ class AnimeEpisodesLayoutState extends State<AnimeEpisodesLayout> {
         title: const Text('Episodes'),
       ),
       body: Center(
-          child: SingleChildScrollView(
-            child: SelectableText(onTap: tapFunction, testText),
-          ),
+          child: SelectableText(onTap: tapFunction, testText),
       ),
     );
   }
