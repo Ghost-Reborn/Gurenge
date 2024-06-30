@@ -43,7 +43,9 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout>{
         title: Text(name),
       ),
       body: Center(
-        child: Text(testText),
+        child: SingleChildScrollView(
+          child: Text(testText),
+        ),
       ),
     );
   }
