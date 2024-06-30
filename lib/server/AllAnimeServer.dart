@@ -34,13 +34,23 @@ class AllAnimeServer {
     return dioConnect.connectAndGetJson(queryUrl);
   }
 
+  Future<Map<String, dynamic>> getAnimeDetails(String id) async {
+    String queryUrl = "$baseUrl?variables={\"showId\":\"$id\"}&query=query(\$showId:String!){show(_id:\$showId){"
+        "name,"
+        "englishName,"
+        "thumbnail"
+        "}}";
+    DioConnect dioConnect = DioConnect();
+    return dioConnect.connectAndGetJson(queryUrl);
+  }
+
   Future<Map<String, dynamic>> testQuery() async {
     String baseUrl = "https://api.allanime.day/api";
 
     String queryUrl = "";
     queryUrl = "https://api.allanime.day/api?variables={%22_id%22:%22ReooPAxPMsHM4KPMY%22}&extensions={%22persistedQuery%22:{%22version%22:1,%22sha256Hash%22:%229d7439c90f203e534ca778c4901f9aa2d3ad42c06243ab2c5e6b79612af32028%22}}";
 
-    queryUrl = "$baseUrl?variables={\"showId\":\"ReooPAxPMsHM4KPMY\"}&query=query(\$showId:String!){show(showId:\$showId){_id,name}}";
+    queryUrl = "$baseUrl?variables={\"showId\":\"ReooPAxPMsHM4KPMY\"}&query=query(\$showId:String!){show(_id:\$showId){_id,name}}";
 
     DioConnect dioConnect = DioConnect();
     return dioConnect.connectAndGetJson(queryUrl);

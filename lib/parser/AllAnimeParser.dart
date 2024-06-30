@@ -1,3 +1,4 @@
+import 'package:Gurenge/model/AnimeDetails.dart';
 import 'package:Gurenge/server/AllAnimeServer.dart';
 import '../model/AllAnime.dart';
 
@@ -42,5 +43,14 @@ class AllAnimeParser {
       allAnimes.add(AllAnime(_id, name, thumbnail));
     });
     return allAnimes;
+  }
+
+  Future<AnimeDetails> parseAnimeDetails(String id) async {
+    Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getAnimeDetails(id);
+    String name = animeDetailsJson['data']['show']['name'];
+    String englishName = animeDetailsJson['data']['show']['englishName'];
+    String thumbnail = animeDetailsJson['data']['show']['thumbnail'];
+    AnimeDetails animeDetails = AnimeDetails(name, englishName, thumbnail);
+    return animeDetails;
   }
 }

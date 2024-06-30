@@ -1,5 +1,8 @@
+import 'package:Gurenge/parser/AllAnimeParser.dart';
 import 'package:Gurenge/server/AllAnimeServer.dart';
 import 'package:flutter/material.dart';
+
+import '../model/AnimeDetails.dart';
 
 class AnimeDetailsLayout extends StatefulWidget{
 
@@ -29,10 +32,10 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout>{
   }
 
   void fetchData() async {
-    AllAnimeServer allAnimeServer = AllAnimeServer();
-    Map<String,dynamic> testQuery = await allAnimeServer.testQuery();
+    AllAnimeParser parser = AllAnimeParser();
+    AnimeDetails animeDetails = await parser.parseAnimeDetails(id);
     setState(() {
-      testText = testQuery.toString();
+      testText = animeDetails.name;
     });
   }
 
@@ -42,9 +45,10 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout>{
       appBar: AppBar(
         title: Text(name),
       ),
-      body: Center(
+      body: Container(
+        margin: EdgeInsets.all(30.0),
         child: SingleChildScrollView(
-          child: Text(testText),
+          child: SelectableText(testText),
         ),
       ),
     );
