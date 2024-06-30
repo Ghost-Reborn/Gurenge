@@ -38,7 +38,8 @@ class AllAnimeServer {
     String queryUrl = "$baseUrl?variables={\"showId\":\"$id\"}&query=query(\$showId:String!){show(_id:\$showId){"
         "name,"
         "englishName,"
-        "thumbnail"
+        "thumbnail,"
+        "availableEpisodesDetail"
         "}}";
     DioConnect dioConnect = DioConnect();
     return dioConnect.connectAndGetJson(queryUrl);

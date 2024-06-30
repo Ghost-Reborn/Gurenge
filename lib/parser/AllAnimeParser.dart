@@ -50,7 +50,8 @@ class AllAnimeParser {
     String name = animeDetailsJson['data']['show']['name'];
     String englishName = animeDetailsJson['data']['show']['englishName'];
     String thumbnail = animeDetailsJson['data']['show']['thumbnail'];
-    AnimeDetails animeDetails = AnimeDetails(name, englishName, thumbnail);
+    List<dynamic> availableEpisodes = animeDetailsJson['data']['show']['availableEpisodesDetail']['sub'];
+    AnimeDetails animeDetails = AnimeDetails(name, englishName, thumbnail, availableEpisodes);
     return animeDetails;
   }
 

@@ -21,7 +21,8 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout> {
   String id;
   String name = "";
   String testText = "Loading...";
-  AnimeDetails animeDetails = AnimeDetails('', "", "");
+  AnimeDetails animeDetails = AnimeDetails('', '','',[]);
+  bool isLoaded = false;
 
   AnimeDetailsLayoutState(this.id, this.name);
 
@@ -36,14 +37,17 @@ class AnimeDetailsLayoutState extends State<AnimeDetailsLayout> {
     AnimeDetails animeDetails = await parser.parseAnimeDetails(id);
     setState(() {
       this.animeDetails = animeDetails;
+      isLoaded = true;
     });
   }
 
   void _onFabClicked() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => AnimeEpisodesLayout(id,"1")));
+    if(isLoaded){
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AnimeEpisodesLayout(id,animeDetails.availableEpisodes)));
+    }
   }
 
   @override

@@ -1,16 +1,15 @@
-import 'package:Gurenge/parser/AllAnimeServerParser.dart';
 import 'package:flutter/material.dart';
 
 class AnimeEpisodesLayout extends StatefulWidget {
 
   String id;
-  String episode;
+  List<dynamic> availableEpisodes;
 
-  AnimeEpisodesLayout(this.id, this.episode, {super.key});
+  AnimeEpisodesLayout(this.id, this.availableEpisodes, {super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return AnimeEpisodesLayoutState(id, episode);
+    return AnimeEpisodesLayoutState(id, availableEpisodes);
   }
 }
 
@@ -18,15 +17,17 @@ class AnimeEpisodesLayoutState extends State<AnimeEpisodesLayout> {
 
   String testText = "Not clicked!";
   String id;
-  String episode;
+  List<dynamic> availableEpisode;
 
-  AnimeEpisodesLayoutState(this.id, this.episode);
+  AnimeEpisodesLayoutState(this.id, this.availableEpisode);
 
   void tapFunction() async {
-    // TODO show available servers (Luf-Mp4 etc) and show list of servers
-    // void test = await AllAnimeServerParser().parseAnimeServers(id, episode);
+    testText = "";
+    for(var episode in availableEpisode){
+      testText += episode + "\n\n";
+    }
     setState(() {
-      testText = "Done";
+      testText;
     });
   }
 
