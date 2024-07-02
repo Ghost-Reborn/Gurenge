@@ -50,7 +50,8 @@ class AllAnimeParser {
     String name = animeDetailsJson['data']['show']['name'];
     String englishName = animeDetailsJson['data']['show']['englishName'];
     String thumbnail = animeDetailsJson['data']['show']['thumbnail'];
-    List<dynamic> availableEpisodes = animeDetailsJson['data']['show']['availableEpisodesDetail']['sub'];
+    List<dynamic> tempAvailableEpisodes = animeDetailsJson['data']['show']['availableEpisodesDetail']['sub'];
+    List<String> availableEpisodes = tempAvailableEpisodes.reversed.map((dynamic item) => item.toString()).toList();
     AnimeDetails animeDetails = AnimeDetails(name, englishName, thumbnail, availableEpisodes);
     return animeDetails;
   }

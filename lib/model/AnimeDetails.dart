@@ -2,7 +2,7 @@ class AnimeDetails{
   final String _name;
   final String _englishName;
   final String _thumbnail;
-  final List<dynamic> _availableEpisodes;
+  final List<String> _availableEpisodes;
 
   AnimeDetails(
       this._name,
@@ -14,5 +14,5 @@ class AnimeDetails{
   String get name => _name;
   String get englishName => _englishName;
   String get thumbnail => _thumbnail;
-  List<dynamic> get availableEpisodes => _availableEpisodes;
+  List<String> get availableEpisodes => _availableEpisodes;
 }

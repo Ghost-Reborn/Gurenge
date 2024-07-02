@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AnimeEpisodesLayout extends StatefulWidget {
-
   String id;
-  List<dynamic> availableEpisodes;
+  List<String> availableEpisodes;
 
   AnimeEpisodesLayout(this.id, this.availableEpisodes, {super.key});
 
@@ -14,31 +13,47 @@ class AnimeEpisodesLayout extends StatefulWidget {
 }
 
 class AnimeEpisodesLayoutState extends State<AnimeEpisodesLayout> {
-
   String testText = "Not clicked!";
   String id;
-  List<dynamic> availableEpisode;
+  List<String> availableEpisode;
 
   AnimeEpisodesLayoutState(this.id, this.availableEpisode);
-
-  void tapFunction() async {
-    testText = "";
-    for(var episode in availableEpisode){
-      testText += episode + "\n\n";
-    }
-    setState(() {
-      testText;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Episodes'),
-      ),
-      body: Center(
-          child: SelectableText(onTap: tapFunction, testText),
+        appBar: AppBar(
+          title: const Text('Episodes'),
+        ),
+        body: ListView.builder(
+          itemCount: availableEpisode.length,
+          itemBuilder: (context, index) {
+            return EpisodeButton(episodeNumber: availableEpisode[index]);
+          },
+        )
+    );
+  }
+}
+
+class EpisodeButton extends StatelessWidget {
+  final String episodeNumber;
+
+  const EpisodeButton({super.key, required this.episodeNumber});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+          textStyle: const TextStyle(fontSize: 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        onPressed: () {  },
+        child: Text(episodeNumber),
       ),
     );
   }
