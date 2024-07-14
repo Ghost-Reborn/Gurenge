@@ -7,7 +7,7 @@ class AllAnimeServer {
   /// type - anime, manga
   Future<Map<String, dynamic>> queryPopular() async {
     String queryUrl =
-        "$baseUrl?variables={\"size\":30,\"type\":\"anime\",\"dateRange\":1,\"page\":1,\"allowAdult\":false,\"allowUnknown\":false}&query=query(\$size:Int!,\$dateRange:Int!,\$page:Int!,\$allowAdult:Boolean!,\$allowUnknown:Boolean!,){queryPopular(type:anime,size:\$size,dateRange:\$dateRange,page:\$page,allowAdult:\$allowAdult,allowUnknown:\$allowUnknown){total,recommendations{anyCard{_id,name,thumbnail}}}}";
+        "$baseUrl?variables={\"size\":30,\"type\":\"anime\",\"dateRange\":1,\"page\":1,\"allowAdult\":false,\"allowUnknown\":false}&query=query(\$size:Int!,\$dateRange:Int!,\$page:Int!,\$allowAdult:Boolean!,\$allowUnknown:Boolean!,){queryPopular(type:anime,size:\$size,dateRange:\$dateRange,page:\$page,allowAdult:\$allowAdult,allowUnknown:\$allowUnknown){total,recommendations{anyCard{_id,name,englishName,thumbnail}}}}";
     DioConnect dioConnect = DioConnect();
     return dioConnect.connectAndGetJson(queryUrl);
   }

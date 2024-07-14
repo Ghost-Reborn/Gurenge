@@ -1,6 +1,6 @@
+import 'AnimeThumbnail.dart';
 import 'package:flutter/material.dart';
 import 'package:Gurenge/model/AllAnime.dart';
-import 'AnimeThumbnail.dart';
 import 'package:Gurenge/layout/AnimeDetailsLayout.dart';
 
 class AnimeGrid extends StatelessWidget {

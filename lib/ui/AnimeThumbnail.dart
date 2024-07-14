@@ -37,18 +37,16 @@ class _AnimeThumbnailState extends State<AnimeThumbnail> {
                 ),
               ),
               Expanded(
-                child: Flexible(
-                  child: Text(
-                    widget.animeName,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 2, // Adjust based on your design
-                    overflow: TextOverflow.ellipsis,
+                child: Text(
+                  widget.animeName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.black54,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
+                  maxLines: 2, // Adjust based on your design
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

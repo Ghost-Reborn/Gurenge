@@ -8,12 +8,16 @@ class AllAnimeParser {
     List<dynamic> recommendations =
         queryPopularJSON['data']['queryPopular']['recommendations'];
     List<AllAnime> allAnimes = [];
-    recommendations.forEach((recommendation) {
-      String _id = recommendation['anyCard']['_id'].toString();
+    for (var recommendation in recommendations) {
+      String id = recommendation['anyCard']['_id'].toString();
       String name = recommendation['anyCard']['name'].toString();
+      String englishName = recommendation['anyCard']['englishName'].toString();
       String thumbnail = recommendation['anyCard']['thumbnail'].toString();
-      allAnimes.add(AllAnime(_id, name, thumbnail));
-    });
+      if(englishName.isNotEmpty){
+        name = englishName;
+      }
+      allAnimes.add(AllAnime(id, name, thumbnail));
+    }
     return allAnimes;
   }
 
@@ -23,12 +27,12 @@ class AllAnimeParser {
         await AllAnimeServer().queryRandomRecommendation();
     List<dynamic> recommendations = queryRandomRecommendationJSON['data']['queryRandomRecommendation'];
     List<AllAnime> allAnimes = [];
-    recommendations.forEach((recommendation) {
-      String _id = recommendation['_id'].toString();
+    for (var recommendation in recommendations) {
+      String id = recommendation['_id'].toString();
       String name = recommendation['name'].toString();
       String thumbnail = recommendation['thumbnail'].toString();
-      allAnimes.add(AllAnime(_id, name, thumbnail));
-    });
+      allAnimes.add(AllAnime(id, name, thumbnail));
+    }
     return allAnimes;
   }
 
@@ -36,12 +40,12 @@ class AllAnimeParser {
     Map<String, dynamic> searchJSON = await AllAnimeServer().searchAnime(anime);
     List<dynamic> searches = searchJSON['data']['shows']['edges'];
     List<AllAnime> allAnimes = [];
-    searches.forEach((search) {
-      String _id = search['_id'].toString();
+    for (var search in searches) {
+      String id = search['_id'].toString();
       String name = search['name'].toString();
       String thumbnail = search['thumbnail'].toString();
-      allAnimes.add(AllAnime(_id, name, thumbnail));
-    });
+      allAnimes.add(AllAnime(id, name, thumbnail));
+    }
     return allAnimes;
   }
 
