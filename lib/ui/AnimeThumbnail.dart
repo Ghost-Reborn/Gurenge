@@ -41,8 +41,8 @@ class _AnimeThumbnailState extends State<AnimeThumbnail> {
                   widget.animeName,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.black54,
-                    fontSize: 15,
+                    color: const Color.fromARGB(255, 57, 57, 57),
+                    fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
                   maxLines: 2, // Adjust based on your design

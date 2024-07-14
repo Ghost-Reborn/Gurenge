@@ -11,7 +11,7 @@ class AnimeGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.redAccent[100],
+      color: const Color.fromARGB(255, 220, 123, 108),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, // Number of widgets in a row

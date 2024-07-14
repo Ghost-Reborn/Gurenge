@@ -15,9 +15,10 @@ class Gurenge extends StatelessWidget {
       home: Scaffold(
           appBar: AppBar(
             title: const Text("Gurenge"),
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.redAccent,
           ),
-          body: const GurengeBody()),
+          body: GurengeBody(),
+      )
     );
   }
 }

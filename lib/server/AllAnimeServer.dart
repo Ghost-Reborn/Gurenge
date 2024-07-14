@@ -29,13 +29,15 @@ class AllAnimeServer {
   }
 
   Future<Map<String, dynamic>> getServers(String id, String episode) async {
-    String queryUrl = "$baseUrl?variables={\"showId\":\"$id\",\"translationType\":\"sub\",\"episodeString\":\"$episode\"}&query=query(\$showId:String!,\$translationType:VaildTranslationTypeEnumType!,\$episodeString:String!){episode(showId:\$showId,translationType:\$translationType,episodeString:\$episodeString){episodeString,sourceUrls}}";
+    String queryUrl =
+        "$baseUrl?variables={\"showId\":\"$id\",\"translationType\":\"sub\",\"episodeString\":\"$episode\"}&query=query(\$showId:String!,\$translationType:VaildTranslationTypeEnumType!,\$episodeString:String!){episode(showId:\$showId,translationType:\$translationType,episodeString:\$episodeString){episodeString,sourceUrls}}";
     DioConnect dioConnect = DioConnect();
     return dioConnect.connectAndGetJson(queryUrl);
   }
 
   Future<Map<String, dynamic>> getAnimeDetails(String id) async {
-    String queryUrl = "$baseUrl?variables={\"showId\":\"$id\"}&query=query(\$showId:String!){show(_id:\$showId){"
+    String queryUrl =
+        "$baseUrl?variables={\"showId\":\"$id\"}&query=query(\$showId:String!){show(_id:\$showId){"
         "name,"
         "englishName,"
         "thumbnail,"
@@ -45,13 +47,40 @@ class AllAnimeServer {
     return dioConnect.connectAndGetJson(queryUrl);
   }
 
-  Future<Map<String, dynamic>> testQuery() async {
+  Future<Map<String, dynamic>> getAnimeName(String id) async {
+    String queryUrl =
+        "$baseUrl?variables={\"showId\":\"$id\"}&query=query(\$showId:String!){show(_id:\$showId){"
+        "name,"
+        "}}";
+    DioConnect dioConnect = DioConnect();
+    return dioConnect.connectAndGetJson(queryUrl);
+  }
+
+  Future<Map<String, dynamic>> getRelatedShows(String id) async {
+    String baseUrl = "https://api.allanime.day/api";
+
+    String queryUrl = "$baseUrl?variables={\"showId\":\"" +
+        id +
+        "\"}&query=query(\$showId:String!){show(_id:\$showId){"
+            "relatedShows"
+            "}}";
+
+    DioConnect dioConnect = DioConnect();
+    return dioConnect.connectAndGetJson(queryUrl);
+  }
+
+  Future<Map<String, dynamic>> testQuery(String id) async {
     String baseUrl = "https://api.allanime.day/api";
 
     String queryUrl = "";
-    queryUrl = "https://api.allanime.day/api?variables={%22_id%22:%22ReooPAxPMsHM4KPMY%22}&extensions={%22persistedQuery%22:{%22version%22:1,%22sha256Hash%22:%229d7439c90f203e534ca778c4901f9aa2d3ad42c06243ab2c5e6b79612af32028%22}}";
+    queryUrl =
+        "https://api.allanime.day/api?variables={%22_id%22:%22ReooPAxPMsHM4KPMY%22}&extensions={%22persistedQuery%22:{%22version%22:1,%22sha256Hash%22:%229d7439c90f203e534ca778c4901f9aa2d3ad42c06243ab2c5e6b79612af32028%22}}";
 
-    queryUrl = "$baseUrl?variables={\"showId\":\"ReooPAxPMsHM4KPMY\"}&query=query(\$showId:String!){show(_id:\$showId){_id,name}}";
+    queryUrl = "$baseUrl?variables={\"showId\":\"" +
+        id +
+        "\"}&query=query(\$showId:String!){show(_id:\$showId){"
+            "relatedShows"
+            "}}";
 
     DioConnect dioConnect = DioConnect();
     return dioConnect.connectAndGetJson(queryUrl);
