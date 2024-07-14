@@ -1,6 +1,8 @@
 import 'package:Gurenge/parser/AllAnimeServerParser.dart';
 import 'package:flutter/material.dart';
 
+import 'AnimePlaybackLayout.dart';
+
 class AnimeServerLayout extends StatefulWidget {
   final String id;
   final String episodeNumber;
@@ -43,16 +45,13 @@ class TestTextState extends State<TestText> {
   final String id;
   final String episodeNumber;
   TestTextState(this.id, this.episodeNumber);
-
-  String test = "Loading....";
+  List<String> servers = [];
 
   void findServers() async {
     AllAnimeServerParser serverParser = AllAnimeServerParser();
-    List<String> servers = await serverParser.parseAnimeServers(id, episodeNumber);
+    List<String> updatedServers = await serverParser.parseAnimeServers(id, episodeNumber);
     setState(() {
-      for(int i=0;i<servers.length;i++){
-        test += servers[i] + "\n\n";
-      }
+      servers = updatedServers;
     });
   }
 
@@ -64,6 +63,40 @@ class TestTextState extends State<TestText> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(test);
+    return ListView.builder(
+      itemCount: servers.length,
+      itemBuilder: (context, index) {
+        return ServerButton(servers[index]);
+      },
+    );
+  }
+}
+
+class ServerButton extends StatelessWidget {
+  final String url;
+
+  const ServerButton(this.url,{super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+          textStyle: const TextStyle(fontSize: 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AnimePlayBackLayout(url)));
+        },
+        child: Text(url),
+      ),
+    );
   }
 }
