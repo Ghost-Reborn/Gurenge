@@ -1,3 +1,4 @@
+import 'package:Gurenge/layout/AnimeServerLayout.dart';
 import 'package:flutter/material.dart';
 
 class AnimeEpisodesLayout extends StatefulWidget {
@@ -28,7 +29,7 @@ class AnimeEpisodesLayoutState extends State<AnimeEpisodesLayout> {
         body: ListView.builder(
           itemCount: availableEpisode.length,
           itemBuilder: (context, index) {
-            return EpisodeButton(episodeNumber: availableEpisode[index]);
+            return EpisodeButton(id:id,episodeNumber: availableEpisode[index]);
           },
         )
     );
@@ -37,8 +38,9 @@ class AnimeEpisodesLayoutState extends State<AnimeEpisodesLayout> {
 
 class EpisodeButton extends StatelessWidget {
   final String episodeNumber;
+  final String id;
 
-  const EpisodeButton({super.key, required this.episodeNumber});
+  const EpisodeButton({super.key, required this.episodeNumber, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,12 @@ class EpisodeButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: () {  },
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AnimeServerLayout(id, episodeNumber)));
+        },
         child: Text(episodeNumber),
       ),
     );
