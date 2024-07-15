@@ -83,11 +83,12 @@ class AllAnimeParser {
     Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getEpisodesDetails(id,episodeNumber);
     Map<String, dynamic> episodeInfo = animeDetailsJson['data']['episode']['episodeInfo'];
     String episode = episodeInfo['episodeIdNum'].toString();
+    String episodeName = episodeInfo['notes'];
     String thumbnail = episodeInfo['thumbnails'][0];
     if(thumbnail.contains("data2")){
       thumbnail = "https://wp.youtube-anime.com/aln.youtube-anime.com$thumbnail";
     }
-    return EpisodeDetails(episode, thumbnail);
+    return EpisodeDetails(episode, episodeName,thumbnail);
   }
 
   // Future<String> testAllAnime(String id) async {

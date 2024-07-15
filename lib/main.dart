@@ -18,7 +18,7 @@ class Gurenge extends StatelessWidget {
             title: const Text("Gurenge"),
             backgroundColor: Colors.redAccent,
           ),
-          body: TestLayout(),
+          body: GurengeBody(),
       )
     );
   }
