@@ -25,9 +25,9 @@ class TestLayoutState extends State<TestLayout> {
 
   void fetchData() async {
     AllAnimeParser allAnimeParser = AllAnimeParser();
-    EpisodeDetails test = await allAnimeParser.getEpisodeDetails("ReooPAxPMsHM4KPMY", "1020");
+    EpisodeDetails test = await allAnimeParser.getEpisodeDetail("ReooPAxPMsHM4KPMY", "1020");
     setState(() {
-      testText = test.episode;
+      testText = test.thumbnail;
     });
   }
 

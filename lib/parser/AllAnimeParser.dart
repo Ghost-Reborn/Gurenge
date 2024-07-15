@@ -79,10 +79,10 @@ class AllAnimeParser {
     return relations;
   }
 
-  Future<EpisodeDetails> getEpisodeDetails(String id, String episode) async {
-    Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getEpisodesDetails(id,episode);
-    Map<String, dynamic> episodeInfo = animeDetailsJson['data']['show']['episodeInfo'];
-    String episode = episodeInfo['episodeIdNum'];
+  Future<EpisodeDetails> getEpisodeDetail(String id, String episodeNumber) async {
+    Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getEpisodesDetails(id,episodeNumber);
+    Map<String, dynamic> episodeInfo = animeDetailsJson['data']['episode']['episodeInfo'];
+    String episode = episodeInfo['episodeIdNum'].toString();
     String thumbnail = episodeInfo['thumbnails'][0];
     if(thumbnail.contains("data2")){
       thumbnail = "https://wp.youtube-anime.com/aln.youtube-anime.com$thumbnail";
