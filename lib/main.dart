@@ -1,3 +1,4 @@
+import 'package:Gurenge/layout/TestLayout.dart';
 import 'package:flutter/material.dart';
 import 'package:Gurenge/ui/GurengeBody.dart';
 
@@ -17,7 +18,7 @@ class Gurenge extends StatelessWidget {
             title: const Text("Gurenge"),
             backgroundColor: Colors.redAccent,
           ),
-          body: GurengeBody(),
+          body: TestLayout(),
       )
     );
   }

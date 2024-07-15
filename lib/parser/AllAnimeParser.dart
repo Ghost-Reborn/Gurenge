@@ -1,4 +1,5 @@
 import 'package:Gurenge/model/AnimeDetails.dart';
+import 'package:Gurenge/model/EpisodeDetails.dart';
 import 'package:Gurenge/server/AllAnimeServer.dart';
 import '../model/AllAnime.dart';
 
@@ -68,7 +69,7 @@ class AllAnimeParser {
   }
 
   Future<List<String>> getRelationIDs(String id) async {
-    Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getRelatedShows("cskJzx6rseAgcGcAe");
+    Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getRelatedShows(id);
     List<dynamic> relatedShows = animeDetailsJson['data']['show']['relatedShows'];
     List<String> relations = [];
     for (var relatedShow in relatedShows) {
@@ -78,21 +79,32 @@ class AllAnimeParser {
     return relations;
   }
 
-  Future<String> testAllAnime(String id) async {
-    Map<String, dynamic> animeDetailsJson =
-        await AllAnimeServer().testQuery("cskJzx6rseAgcGcAe");
-    List<dynamic> relations = animeDetailsJson['data']['show']['relatedShows'];
-    String test = "";
-    for (var relation in relations) {
-      String id = relation['showId'];
-      String rel = relation['relation'];
-      Map<String, dynamic> animeName = await AllAnimeServer().getAnimeName(id);
-      if(animeName['data']['show'] == null){
-        continue;
-      }
-      String anime = animeName['data']['show']['name'];
-      test += "$rel:$anime\n";
+  Future<EpisodeDetails> getEpisodeDetails(String id, String episode) async {
+    Map<String, dynamic> animeDetailsJson = await AllAnimeServer().getEpisodesDetails(id,episode);
+    Map<String, dynamic> episodeInfo = animeDetailsJson['data']['show']['episodeInfo'];
+    String episode = episodeInfo['episodeIdNum'];
+    String thumbnail = episodeInfo['thumbnails'][0];
+    if(thumbnail.contains("data2")){
+      thumbnail = "https://wp.youtube-anime.com/aln.youtube-anime.com$thumbnail";
     }
-    return test;
+    return EpisodeDetails(episode, thumbnail);
   }
+
+  // Future<String> testAllAnime(String id) async {
+  //   Map<String, dynamic> animeDetailsJson =
+  //       await AllAnimeServer().testQuery("ReooPAxPMsHM4KPMY", "2");
+  //   List<dynamic> relations = animeDetailsJson['data']['show']['relatedShows'];
+  //   String test = "";
+  //   for (var relation in relations) {
+  //     String id = relation['showId'];
+  //     String rel = relation['relation'];
+  //     Map<String, dynamic> animeName = await AllAnimeServer().getAnimeName(id);
+  //     if(animeName['data']['show'] == null){
+  //       continue;
+  //     }
+  //     String anime = animeName['data']['show']['name'];
+  //     test += "$rel:$anime\n";
+  //   }
+  //   return test;
+  // }
 }
